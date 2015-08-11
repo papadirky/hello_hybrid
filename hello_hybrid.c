@@ -3,7 +3,9 @@
 #include <omp.h>
 
 int main(int argc, char *argv[]) {
-  int numprocs, rank, namelen;
+  int numprocs;
+  int rank; 
+  int namelen;
   char processor_name[MPI_MAX_PROCESSOR_NAME];
   int iam = 0, np = 1;
 
@@ -11,6 +13,8 @@ int main(int argc, char *argv[]) {
   MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Get_processor_name(processor_name, &namelen);
+
+  printf("Hello world from process %d", rank);
 
   #pragma omp parallel default(shared) private(iam, np)
   {
